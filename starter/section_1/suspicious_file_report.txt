@@ -1,0 +1,22 @@
+# provide the additional filename that you have identified as a potentially suspicious file. Also provide details about the Command and control Domain which is hardcoded inside this file. 
+
+# Filename
+
+
+# Callout domain
+
+ 
+Downloads/notes.txt: YARA.crypto_miner.UNOFFICIAL FOUND
+Downloads/SSH-One: YARA.crypto_miner.UNOFFICIAL FOUND
+Downloads/wipefs: YARA.crypto_miner.UNOFFICIAL FOUND
+Downloads/tmplog: YARA.crypto_miner.UNOFFICIAL FOUND
+
+----------- SCAN SUMMARY -----------
+Known viruses: 1
+Engine version: 0.100.3
+Scanned directories: 1
+Scanned files: 8
+Infected files: 4
+Data scanned: 2.40 MB
+Data read: 2.40 MB (ratio 1.00:1)
+Time: 0.107 sec (0 m 0 s)

@@ -1,0 +1,22 @@
+# Provide the backdoor entries created by the nation state attackers. 
+
+# Rouge Username
+
+Sep 22 10:54:28 ubuntu-VirtualBox groupadd[2967]: group added to /etc/group: name=darklord, GID=1001
+Sep 22 10:54:28 ubuntu-VirtualBox groupadd[2967]: group added to /etc/gshadow: name=darklord
+Sep 22 10:54:28 ubuntu-VirtualBox groupadd[2967]: new group: name=darklord, GID=1001
+Sep 22 10:54:28 ubuntu-VirtualBox useradd[2971]: new user: name=darklord, UID=1001, GID=1001, home=/home/darklord, shell=/bin/bash
+Sep 22 10:54:34 ubuntu-VirtualBox passwd[2978]: pam_unix(passwd:chauthtok): password changed for darklord
+Sep 22 10:54:36 ubuntu-VirtualBox chfn[3045]: changed user 'darklord' information
+
+
+# Backdoor process name
+0 S root       946   945  0  82   2 -   648 inet_c 05:13 ?        00:00:00 /tmp/remotesec -k -l 56565
+1 S root        31     2  0  60 -20 -     0 rescue 05:13 ?        00:00:00 [crypto]
+
+
+# Backdoor port number the above process is listening on
+56565
+
+
+

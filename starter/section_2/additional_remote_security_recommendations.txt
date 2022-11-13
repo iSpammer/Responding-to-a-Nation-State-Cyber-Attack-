@@ -1,0 +1,53 @@
+1) To avoid having an unattended SSH session, you can set an Idle timeout interval. We can add the following line to the /etc/ssh/sshd_config file
+
+"ClientAliveInterval 360"
+"ClientAliveCountMax 0"
+
+Once the interval has passed (360 second), the idle user will be automatically logged out
+
+2) We need to prevent remote logins from accounts with empty passwords for added security by adding the following lines to the /etc/ssh/sshd_config file
+
+"PermitEmptyPasswords no"
+
+3) To provide another layer of security, the number of users who can access the SSH must be limited to only certain users who need remote access. This way, we will minimize the impact of having a user with a weak password.
+
+We can do so by adding the following line in /etc/ssh/sshd_config file:
+
+"AllowUsers user1 user2"
+
+Which will only allow user1 and user2 to access the SSH Service
+
+Or we can add the following line
+
+"AllowGroups group1 group2"
+
+Which will only allow group1 and group2 to access the SSH Service
+
+4) SSH has two protocols that it can use. Protocol 1 is older and is less secure. Protocol 2 is what we must be using to harden our security. Which is also a security recommendation from the PCI-DSS Standard, to do so we need to update the following line in the /etc/ssh/sshd_config file
+
+Before 
+"#Protocol 2, 1"
+After
+"Protocol 2"
+
+5) One of the main benefits of changing the port and using a non-standard port is to avoid being seen by casual scans. The vast majority of hackers looking for any open SSH servers will look for port 22, since by default, SSH listens for incoming connections on that port. If it’s harder to scan for our SSH server, then our chances of being attacked are reduced.
+
+We can choose any unused port as long as it’s not used by another service, and to do so we need to change the port on the /etc/ssh/sshd_config file and add the following lines
+
+"Port 4593"
+
+6) If we want the server to be reachable from only a specific IP address on port 22, then we must consider filtering connections at the firewall by adding a firewall rule on the router or update our iptables like this:
+iptables -A INPUT -p tcp -s 192.168.56.102 --dport 22 -j ACCEPT
+
+Which will only allow the ip "192.168.56.102" to access port 22 SSH Server
+
+7) The SSH servers should be secured with Two-Factor Authentication configured on it. It is one of the main protections we need to add to the SSH servers to protect them from unauthorized access since each user login must tie back to a configured 2FA user. Even if a hacker manages to get a hold of the password or breaks into our SSH server, they will still get blocked by the 2FA
+
+8) Using Public/Private Keys
+
+Public/Private Keys authentication is certainly more secure and a much better solution than password authentication. Each key is a large number with different mathematical properties. The Private Key is stored on the computer we login from, while the public key is stored on the .ssh/authorized_keys file on each computer we want to login to.
+
+This is particularly important if the computer is visible on the Internet. Using encrypted keys for authentication is useful as we won’t need to enter a password anymore. Once the public/private key-pair authentication has been configured on the server, we can completely disable password authentication, this means that no one without an authorized key will be able to gain access. Even the most inventive hackers won’t be able to interfere or sneak onto a session, and no more cracking password attempts
+
+
+
